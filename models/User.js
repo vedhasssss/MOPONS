@@ -103,6 +103,14 @@ const userSchema = new mongoose.Schema({
   isBlocked: {
     type: Boolean,
     default: false
+  },
+  termsAccepted: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
+  termsAcceptedAt: {
+    type: Date
   }
 }, {
   timestamps: true

@@ -8,7 +8,7 @@ const notificationSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['expiry_reminder', 'transaction', 'exchange_request', 'exchange_response', 'coupon_sold', 'coupon_approved', 'coupon_rejected', 'system', 'admin'],
+    enum: ['expiry_reminder', 'transaction', 'coupon_sold', 'coupon_approved', 'coupon_rejected', 'system', 'admin'],
     required: true
   },
   title: {
@@ -24,7 +24,7 @@ const notificationSchema = new mongoose.Schema({
   },
   relatedModel: {
     type: String,
-    enum: ['Coupon', 'Transaction', 'Exchange']
+    enum: ['Coupon', 'Transaction']
   },
   isRead: {
     type: Boolean,

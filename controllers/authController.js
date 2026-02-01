@@ -7,7 +7,15 @@ const crypto = require('crypto');
 // @access  Public
 exports.register = async (req, res, next) => {
   try {
-    const { name, email, password, phone } = req.body;
+    const { name, email, password, phone, termsAccepted } = req.body;
+
+    // Validate terms acceptance
+    if (!termsAccepted) {
+      return res.status(400).json({
+        success: false,
+        message: 'You must accept the terms and conditions to register'
+      });
+    }
 
     // Check if user exists
     const existingUser = await User.findOne({ email });
@@ -23,7 +31,9 @@ exports.register = async (req, res, next) => {
       name,
       email,
       password,
-      phone
+      phone,
+      termsAccepted: true,
+      termsAcceptedAt: new Date()
     });
 
     // Generate verification token

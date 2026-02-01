@@ -16,8 +16,7 @@ function Vault() {
     discountPercentage: '',
     expiryDate: '',
     couponCode: '',
-    termsAndConditions: '',
-    isExchangeOnly: false
+    termsAndConditions: ''
   });
   const [imageFile, setImageFile] = useState(null);
   const [submitting, setSubmitting] = useState(false);
@@ -192,7 +191,7 @@ function Vault() {
         setFormData({
             title: '', description: '', category: '', brand: '',
             originalPrice: '', sellingPrice: '', discountPercentage: '',
-            expiryDate: '', couponCode: '', termsAndConditions: '', isExchangeOnly: false
+            expiryDate: '', couponCode: '', termsAndConditions: ''
         });
         setImageFile(null);
       } else {
@@ -238,7 +237,7 @@ function Vault() {
               <p>View your purchased coupons and their codes</p>
             </div>
             <button className="btn btn-primary" onClick={() => setShowAddModal(true)}>
-              + Sell / Exchange Coupon
+              + Sell Coupon
             </button>
           </div>
 
@@ -358,16 +357,10 @@ function Vault() {
               <div className="form-row">
                 <div className="form-group">
                   <label>Selling Price (₹)</label>
-                  <input type="number" name="sellingPrice" className="input" required={!formData.isExchangeOnly} disabled={formData.isExchangeOnly} value={formData.sellingPrice} onChange={handleInputChange} />
+                  <input type="number" name="sellingPrice" className="input" required value={formData.sellingPrice} onChange={handleInputChange} />
                 </div>
               </div>
 
-              <div className="form-group checkbox-group">
-                <label>
-                    <input type="checkbox" name="isExchangeOnly" checked={formData.isExchangeOnly} onChange={handleInputChange} />
-                    Available for Exchange Only
-                </label>
-              </div>
 
               <div className="form-group">
                 <label>Coupon Code (Hidden until purchased)</label>
@@ -376,7 +369,7 @@ function Vault() {
 
               <div className="form-group">
                 <label>
-                  Coupon Image 
+                  Coupon Image (Optional)
                   <span style={{
                     marginLeft: '8px',
                     padding: '2px 8px',
@@ -389,9 +382,9 @@ function Vault() {
                     🤖 AI Auto-Fill
                   </span>
                 </label>
-                <input type="file" className="input" onChange={handleFileChange} accept="image/*" required />
+                <input type="file" className="input" onChange={handleFileChange} accept="image/*" />
                 <small style={{color: '#666', fontSize: '12px', marginTop: '4px', display: 'block'}}>
-                  Upload a coupon image and AI will automatically extract the details!
+                  Upload a coupon image and AI will automatically extract the details! (Optional)
                 </small>
               </div>
 

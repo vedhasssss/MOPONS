@@ -115,22 +115,16 @@ exports.createCoupon = async (req, res, next) => {
       discountPercentage,
       originalPrice,
       sellingPrice,
-      isExchangeOnly,
       couponCode,
       termsAndConditions,
       expiryDate
     } = req.body;
 
-    // Check if image is uploaded
-    if (!req.file) {
-      return res.status(400).json({
-        success: false,
-        message: 'Please upload a coupon image'
-      });
+    // Upload image to Cloudinary if provided
+    let imageUrl = 'https://via.placeholder.com/400x300/667eea/ffffff?text=No+Image';
+    if (req.file) {
+      imageUrl = await uploadToCloudinary(req.file.buffer, 'mopons/coupons');
     }
-
-    // Upload image to Cloudinary
-    const imageUrl = await uploadToCloudinary(req.file.buffer, 'mopons/coupons');
 
     // Create coupon
     const coupon = await Coupon.create({
@@ -142,8 +136,7 @@ exports.createCoupon = async (req, res, next) => {
       brand,
       discountPercentage,
       originalPrice,
-      sellingPrice: isExchangeOnly === 'true' ? 0 : sellingPrice,
-      isExchangeOnly: isExchangeOnly === 'true',
+      sellingPrice,
       couponCode,
       termsAndConditions,
       expiryDate,
@@ -282,13 +275,6 @@ exports.buyCoupon = async (req, res, next) => {
       });
     }
 
-    // Check if exchange only
-    if (coupon.isExchangeOnly) {
-      return res.status(400).json({
-        success: false,
-        message: 'This coupon is available for exchange only'
-      });
-    }
 
     const buyer = await User.findById(req.user.id);
     const seller = await User.findById(coupon.ownerId._id);

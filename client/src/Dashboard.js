@@ -240,13 +240,6 @@ function Dashboard() {
                 <p>List your unused coupons</p>
                 <button className="btn btn-primary" onClick={() => navigateTo('vault')}>Sell Now</button>
               </div>
-
-              <div className="action-card card">
-                <div className="action-icon">🔄</div>
-                <h3>Exchange Coupon</h3>
-                <p>Trade with other users</p>
-                <button className="btn btn-primary" onClick={() => navigateTo('vault')}>Exchange</button>
-              </div>
             </div>
           </div>
 

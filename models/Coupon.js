@@ -46,18 +46,9 @@ const couponSchema = new mongoose.Schema({
   },
   sellingPrice: {
     type: Number,
-    required: function() {
-      return !this.isExchangeOnly;
-    },
+    required: true,
     min: 0
   },
-  isExchangeOnly: {
-    type: Boolean,
-    default: false
-  },
-  exchangePreferences: [{
-    type: String
-  }],
   couponCode: {
     type: String,
     trim: true
@@ -78,7 +69,7 @@ const couponSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    required: [true, 'Please upload an image']
+    default: 'https://via.placeholder.com/400x300/667eea/ffffff?text=No+Image'
   },
   additionalImages: [{
     type: String

@@ -116,7 +116,7 @@ function App() {
               <span className="text-gradient">Save Money</span>
             </h1>
             <p className="hero-subtitle fade-in">
-              The ultimate platform to buy, sell, and exchange coupons.<br />
+              The ultimate platform to buy and sell coupons.<br />
               Never let a coupon go to waste again!
             </p>
             <div className="hero-buttons fade-in">
@@ -168,11 +168,7 @@ function App() {
               <p>Turn your unused coupons into cash. List them on our marketplace and earn money instantly.</p>
             </div>
             
-            <div className="feature-card card">
-              <div className="feature-icon">🔄</div>
-              <h3>Exchange Coupons</h3>
-              <p>Trade coupons with other users. Get what you need by exchanging what you don't.</p>
-            </div>
+
             
             <div className="feature-card card">
               <div className="feature-icon">💰</div>
@@ -218,7 +214,7 @@ function App() {
               <div className="step-number">2</div>
               <div className="step-content">
                 <h3>Browse or List Coupons</h3>
-                <p>Explore our marketplace or list your own coupons for sale or exchange.</p>
+                <p>Explore our marketplace or list your own coupons for sale.</p>
               </div>
             </div>
             
@@ -226,7 +222,7 @@ function App() {
               <div className="step-number">3</div>
               <div className="step-content">
                 <h3>Trade & Save Money</h3>
-                <p>Buy, sell, or exchange coupons and start saving money on every purchase!</p>
+                <p>Buy or sell coupons and start saving money on every purchase!</p>
               </div>
             </div>
           </div>
