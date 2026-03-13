@@ -1,0 +1,101 @@
+/* Vault Page */
+.vault-page {
+  min-height: 100vh;
+  background: var(--gray-50);
+}
+
+.vault-content {
+  padding: 2rem 0;
+}
+
+.vault-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.vault-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.vault-header p {
+  color: var(--gray-600);
+  margin: 0;
+}
+
+/* Vault Grid */
+.vault-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Form Styles */
+.add-coupon-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+/* Empty State specific to Vault */
+.vault-content .empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.flex {
+    display: flex;
+}
+.gap-2 {
+    gap: 0.5rem;
+}
+.justify-center {
+    justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .vault-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
