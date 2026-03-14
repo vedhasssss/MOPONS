@@ -1,4 +1,4 @@
-// API base URL — uses env var in production (Vercel), falls back to localhost in dev
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+// API base URL — empty string in production (same domain), falls back to localhost in dev
+const API_BASE = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5000';
 
 export default API_BASE;
