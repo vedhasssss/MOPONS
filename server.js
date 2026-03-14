@@ -58,21 +58,13 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Serve React app in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client/build')));
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+// 404 handler for API routes
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: 'API Route not found'
   });
-} else {
-  // 404 handler (dev only)
-  app.use((req, res) => {
-    res.status(404).json({
-      success: false,
-      message: 'Route not found'
-    });
-  });
-}
+});
 
 // Error handler (must be last)
 app.use(errorHandler);
