@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Vault.css';
+import API_BASE from './config';
 
 function Vault() {
   const [myCoupons, setMyCoupons] = useState([]);
@@ -29,7 +30,7 @@ function Vault() {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/categories');
+      const response = await fetch(`${API_BASE}/api/categories`);
       const data = await response.json();
       if (data.success) {
         setCategories(data.data);
@@ -58,7 +59,7 @@ function Vault() {
       let allUserCoupons = [];
       
       for (const status of statuses) {
-        const response = await fetch(`http://localhost:5000/api/coupons?status=${status}`, {
+        const response = await fetch(`${API_BASE}/api/coupons?status=${status}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -112,7 +113,7 @@ function Vault() {
       formData.append('image', file);
 
       // Call AI extraction API
-      const response = await fetch('http://localhost:5000/api/ai/extract-coupon', {
+      const response = await fetch(`${API_BASE}/api/ai/extract-coupon`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -174,7 +175,7 @@ function Vault() {
         data.append('image', imageFile);
       }
 
-      const response = await fetch('http://localhost:5000/api/coupons', {
+      const response = await fetch(`${API_BASE}/api/coupons`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Wallet.css';
+import API_BASE from './config';
 
 function Wallet() {
   const [user, setUser] = useState(null);
@@ -27,7 +28,7 @@ function Wallet() {
   const fetchWalletData = async (token) => {
     try {
       // Fetch balance
-      const balanceRes = await fetch('http://localhost:5000/api/wallet/balance', {
+      const balanceRes = await fetch(`${API_BASE}/api/wallet/balance`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const balanceData = await balanceRes.json();
@@ -36,7 +37,7 @@ function Wallet() {
       }
 
       // Fetch transactions
-      const transRes = await fetch('http://localhost:5000/api/wallet/transactions?limit=10', {
+      const transRes = await fetch(`${API_BASE}/api/wallet/transactions?limit=10`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const transData = await transRes.json();
@@ -71,7 +72,7 @@ function Wallet() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/wallet/add-money', {
+      const response = await fetch(`${API_BASE}/api/wallet/add-money`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

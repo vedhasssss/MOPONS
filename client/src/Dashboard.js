@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Dashboard.css';
+import API_BASE from './config';
 
 function Dashboard() {
   const [user, setUser] = useState(null);
@@ -41,7 +42,7 @@ function Dashboard() {
 
   const fetchWalletBalance = async (token) => {
     try {
-      const response = await fetch('http://localhost:5000/api/wallet/balance', {
+      const response = await fetch(`${API_BASE}/api/wallet/balance`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -60,7 +61,7 @@ function Dashboard() {
 
   const fetchRecentTransactions = async (token) => {
     try {
-      const response = await fetch('http://localhost:5000/api/wallet/transactions?limit=5', {
+      const response = await fetch(`${API_BASE}/api/wallet/transactions?limit=5`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -79,7 +80,7 @@ function Dashboard() {
   const fetchUserStats = async (token) => {
     try {
       // Fetch user profile to get stats
-      const userResponse = await fetch('http://localhost:5000/api/auth/me', {
+      const userResponse = await fetch(`${API_BASE}/api/auth/me`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -90,7 +91,7 @@ function Dashboard() {
         const user = userData.data;
         
         // Fetch user's coupons to count active ones
-        const couponsResponse = await fetch('http://localhost:5000/api/coupons', {
+        const couponsResponse = await fetch(`${API_BASE}/api/coupons`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Auth.css';
+import API_BASE from './config';
 
 function Auth() {
   const [isLogin, setIsLogin] = useState(true);
@@ -36,7 +37,7 @@ function Auth() {
         ? { email: formData.email, password: formData.password }
         : formData;
 
-      const response = await fetch(`http://localhost:5000${endpoint}`, {
+      const response = await fetch(`${API_BASE}${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

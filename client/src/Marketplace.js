@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Marketplace.css';
+import API_BASE from './config';
 
 function Marketplace() {
   const [coupons, setCoupons] = useState([]);
@@ -29,7 +30,7 @@ function Marketplace() {
       const currentUser = userData ? JSON.parse(userData) : null;
 
       // Fetch coupons
-      const couponsRes = await fetch('http://localhost:5000/api/coupons');
+      const couponsRes = await fetch(`${API_BASE}/api/coupons`);
       const couponsData = await couponsRes.json();
       if (couponsData.success) {
         // Filter out user's own coupons
@@ -64,7 +65,7 @@ function Marketplace() {
 
     try {
       console.log('Attempting to buy coupon:', couponId);
-      const response = await fetch(`http://localhost:5000/api/coupons/${couponId}/buy`, {
+      const response = await fetch(`${API_BASE}/api/coupons/${couponId}/buy`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
