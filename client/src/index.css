@@ -23,6 +23,28 @@
   --warning: #F59E0B;
   --error: #EF4444;
   --info: #3B82F6;
+}
+
+body.dark-theme {
+  /* Neutral Colors (Dark Mode) */
+  --white: #1f2937;
+  --gray-50: #0f172a;
+  --gray-100: #1e293b;
+  --gray-200: #334155;
+  --gray-300: #475569;
+  --gray-400: #64748b;
+  --gray-500: #94a3b8;
+  --gray-600: #cbd5e1;
+  --gray-700: #e2e8f0;
+  --gray-800: #f1f5f9;
+  --gray-900: #f8fafc;
+  
+  /* Additional overrides for dark mode */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
   
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -442,3 +464,5 @@ a:hover {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--gray-500);
 }
+ 
+ 
