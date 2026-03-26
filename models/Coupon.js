@@ -69,7 +69,7 @@ const couponSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    default: 'https://via.placeholder.com/400x300/667eea/ffffff?text=No+Image'
+    default: ''
   },
   additionalImages: [{
     type: String

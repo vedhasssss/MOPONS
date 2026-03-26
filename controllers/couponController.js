@@ -121,7 +121,7 @@ exports.createCoupon = async (req, res, next) => {
     } = req.body;
 
     // Upload image to Cloudinary if provided
-    let imageUrl = 'https://via.placeholder.com/400x300/667eea/ffffff?text=No+Image';
+    let imageUrl = '';
     if (req.file) {
       imageUrl = await uploadToCloudinary(req.file.buffer, 'mopons/coupons');
     }

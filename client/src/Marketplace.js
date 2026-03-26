@@ -164,7 +164,11 @@ function Marketplace() {
               {coupons.map((coupon) => (
                 <div key={coupon._id} className="coupon-card card">
                   <div className="coupon-image">
-                    <img src={coupon.image || 'https://via.placeholder.com/300x200?text=Coupon'} alt={coupon.title} />
+                    <img
+                      src={coupon.image && !coupon.image.includes('via.placeholder.com') ? coupon.image : `https://picsum.photos/seed/${coupon._id}/400/300`}
+                      alt={coupon.title}
+                      onError={(e) => { e.target.onerror = null; e.target.src = `https://picsum.photos/seed/${coupon._id}/400/300`; }}
+                    />
                     <div className="coupon-badge badge-gradient">
                       {coupon.discountPercentage}% OFF
                     </div>
