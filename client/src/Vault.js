@@ -125,25 +125,36 @@ function Vault() {
 
       if (result.success && result.data) {
         const extracted = result.data;
-        
-        // Auto-fill the form with extracted data
+
+        // Parse discount percentage smartly from AI response
+        let discountPct = '';
+        if (extracted.discountPercentage) {
+          discountPct = extracted.discountPercentage;
+        } else if (extracted.discount) {
+          const match = String(extracted.discount).match(/(\d+(\.\d+)?)/);
+          if (match && (extracted.discountType === 'percentage' || String(extracted.discount).includes('%'))) {
+            discountPct = match[1];
+          }
+        }
+
+        // Auto-fill the form — map all AI field names correctly
         setFormData(prev => ({
           ...prev,
           title: extracted.title || prev.title,
           brand: extracted.brand || prev.brand,
-          description: extracted.description || prev.description,
-          discountPercentage: extracted.discountPercentage || prev.discountPercentage,
-          originalPrice: extracted.originalPrice || prev.originalPrice,
-          couponCode: extracted.couponCode || prev.couponCode,
+          description: extracted.description || (extracted.discount ? `${extracted.discount} off at ${extracted.brand || ''}`.trim() : prev.description),
+          discountPercentage: discountPct || prev.discountPercentage,
+          originalPrice: extracted.originalPrice || extracted.minPurchase || prev.originalPrice,
+          couponCode: extracted.couponCode || extracted.code || prev.couponCode,
           expiryDate: extracted.expiryDate || prev.expiryDate,
-          termsAndConditions: extracted.termsAndConditions || prev.termsAndConditions,
-          // Map AI category to category ID (you'll need to match with your categories)
-          category: prev.category // Keep existing or implement category mapping
+          termsAndConditions: extracted.termsAndConditions || extracted.terms || prev.termsAndConditions,
+          category: prev.category
         }));
 
+        const filledFields = Object.entries(extracted).filter(([,v]) => v).map(([k]) => k).join(', ');
         setMessage({ 
           type: 'success', 
-          text: '✨ Coupon details extracted! Please review and adjust if needed.' 
+          text: `✨ AI extracted: ${filledFields}. Please review and adjust if needed!` 
         });
       } else {
         setMessage({ 
