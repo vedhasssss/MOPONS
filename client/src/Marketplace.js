@@ -182,18 +182,22 @@ function Marketplace() {
                     </div>
                     <div className="coupon-footer">
                       <span className="expiry">Expires: {new Date(coupon.expiryDate).toLocaleDateString()}</span>
-                      {user && coupon.ownerId._id === user._id ? (
-                        <button className="btn btn-secondary btn-sm" disabled>
-                          Your Listing
-                        </button>
-                      ) : (
-                        <button 
-                          className="btn btn-primary btn-sm"
-                          onClick={() => handleBuyCoupon(coupon._id)}
-                        >
-                          Buy Now
-                        </button>
-                      )}
+                      {(() => {
+                        const ownerId = coupon.ownerId?._id || coupon.ownerId;
+                        const isOwner = user && String(ownerId) === String(user._id);
+                        return isOwner ? (
+                          <button className="btn btn-secondary btn-sm" disabled>
+                            Your Listing
+                          </button>
+                        ) : (
+                          <button 
+                            className="btn btn-primary btn-sm"
+                            onClick={() => handleBuyCoupon(coupon._id)}
+                          >
+                            Buy Now
+                          </button>
+                        );
+                      })()}
                     </div>
                   </div>
                 </div>

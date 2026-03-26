@@ -69,9 +69,10 @@ function Vault() {
         if (data.success && data.data.coupons) {
           // Filter coupons owned by the current user
           // These are coupons they BOUGHT (not the ones they listed)
-          const userCoupons = data.data.coupons.filter(
-            coupon => coupon.ownerId._id === currentUser._id
-          );
+          const userCoupons = data.data.coupons.filter(coupon => {
+            const ownerId = coupon.ownerId?._id || coupon.ownerId;
+            return String(ownerId) === String(currentUser._id);
+          });
           console.log(`Found ${userCoupons.length} ${status} coupons`);
           allUserCoupons = [...allUserCoupons, ...userCoupons];
         }
