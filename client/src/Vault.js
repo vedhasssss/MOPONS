@@ -53,9 +53,8 @@ function Vault() {
       const currentUser = JSON.parse(userData);
       console.log('Current user ID:', currentUser._id);
       
-      // Fetch only PURCHASED coupons (sold or used status)
-      // Active coupons are still listed in marketplace, not in vault
-      const statuses = ['sold', 'used'];
+      // Fetch user's listed coupons (active) and purchased coupons (sold, used)
+      const statuses = ['active', 'sold', 'used'];
       let allUserCoupons = [];
       
       for (const status of statuses) {

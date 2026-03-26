@@ -33,11 +33,8 @@ function Marketplace() {
       const couponsRes = await fetch(`${API_BASE}/api/coupons`);
       const couponsData = await couponsRes.json();
       if (couponsData.success) {
-        // Filter out user's own coupons
-        const otherUsersCoupons = couponsData.data.coupons.filter(
-          coupon => coupon.ownerId._id !== currentUser?._id
-        );
-        setCoupons(otherUsersCoupons || []);
+        // Show all coupons (both other users' and current user's)
+        setCoupons(couponsData.data.coupons || []);
       }
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -185,12 +182,18 @@ function Marketplace() {
                     </div>
                     <div className="coupon-footer">
                       <span className="expiry">Expires: {new Date(coupon.expiryDate).toLocaleDateString()}</span>
-                      <button 
-                        className="btn btn-primary btn-sm"
-                        onClick={() => handleBuyCoupon(coupon._id)}
-                      >
-                        Buy Now
-                      </button>
+                      {user && coupon.ownerId._id === user._id ? (
+                        <button className="btn btn-secondary btn-sm" disabled>
+                          Your Listing
+                        </button>
+                      ) : (
+                        <button 
+                          className="btn btn-primary btn-sm"
+                          onClick={() => handleBuyCoupon(coupon._id)}
+                        >
+                          Buy Now
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
