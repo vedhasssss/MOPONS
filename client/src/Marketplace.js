@@ -188,7 +188,7 @@ function Marketplace() {
                       <span className="expiry">Expires: {new Date(coupon.expiryDate).toLocaleDateString()}</span>
                       {(() => {
                         const ownerId = coupon.ownerId?._id || coupon.ownerId;
-                        const isOwner = user && String(ownerId) === String(user._id);
+                        const isOwner = user && String(ownerId) === String(user._id || user.id);
                         return isOwner ? (
                           <button className="btn btn-secondary btn-sm" disabled>
                             Your Listing

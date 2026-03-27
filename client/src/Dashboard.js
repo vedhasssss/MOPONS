@@ -91,7 +91,7 @@ function Dashboard() {
         const user = userData.data;
         
         // Fetch user's coupons to count active ones
-        const couponsResponse = await fetch(`${API_BASE}/api/coupons?ownerId=${user._id}&limit=1000`, {
+        const couponsResponse = await fetch(`${API_BASE}/api/coupons?ownerId=${user._id || user.id}&limit=1000`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }

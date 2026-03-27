@@ -51,14 +51,15 @@ function Vault() {
       }
 
       const currentUser = JSON.parse(userData);
-      console.log('Current user ID:', currentUser._id);
+      const currentUserId = currentUser._id || currentUser.id;
+      console.log('Current user ID:', currentUserId);
       
       // Fetch user's listed coupons (active) and purchased coupons (sold, used)
       const statuses = ['active', 'sold', 'used'];
       let allUserCoupons = [];
       
       for (const status of statuses) {
-        const response = await fetch(`${API_BASE}/api/coupons?status=${status}&ownerId=${currentUser._id}&limit=1000`, {
+        const response = await fetch(`${API_BASE}/api/coupons?status=${status}&ownerId=${currentUserId}&limit=1000`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
