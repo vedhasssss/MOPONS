@@ -30,7 +30,7 @@ function Marketplace() {
       const currentUser = userData ? JSON.parse(userData) : null;
 
       // Fetch coupons
-      const couponsRes = await fetch(`${API_BASE}/api/coupons`);
+      const couponsRes = await fetch(`${API_BASE}/api/coupons?limit=1000`);
       const couponsData = await couponsRes.json();
       if (couponsData.success) {
         // Show all coupons (both other users' and current user's)

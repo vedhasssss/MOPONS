@@ -58,7 +58,7 @@ function Vault() {
       let allUserCoupons = [];
       
       for (const status of statuses) {
-        const response = await fetch(`${API_BASE}/api/coupons?status=${status}`, {
+        const response = await fetch(`${API_BASE}/api/coupons?status=${status}&ownerId=${currentUser._id}&limit=1000`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -67,18 +67,12 @@ function Vault() {
         const data = await response.json();
         
         if (data.success && data.data.coupons) {
-          // Filter coupons owned by the current user
-          // These are coupons they BOUGHT (not the ones they listed)
-          const userCoupons = data.data.coupons.filter(coupon => {
-            const ownerId = coupon.ownerId?._id || coupon.ownerId;
-            return String(ownerId) === String(currentUser._id);
-          });
-          console.log(`Found ${userCoupons.length} ${status} coupons`);
-          allUserCoupons = [...allUserCoupons, ...userCoupons];
+          console.log(`Found ${data.data.coupons.length} ${status} coupons`);
+          allUserCoupons = [...allUserCoupons, ...data.data.coupons];
         }
       }
       
-      console.log('Total purchased coupons:', allUserCoupons.length);
+      console.log('Total user coupons in Vault:', allUserCoupons.length);
       setMyCoupons(allUserCoupons);
       
       setLoading(false);

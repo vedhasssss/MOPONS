@@ -91,7 +91,7 @@ function Dashboard() {
         const user = userData.data;
         
         // Fetch user's coupons to count active ones
-        const couponsResponse = await fetch(`${API_BASE}/api/coupons`, {
+        const couponsResponse = await fetch(`${API_BASE}/api/coupons?ownerId=${user._id}&limit=1000`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -103,7 +103,7 @@ function Dashboard() {
         if (couponsData.success) {
           // Count coupons owned by this user that are not used
           activeCoupons = couponsData.data.coupons.filter(
-            c => c.ownerId._id === user._id && (c.status === 'active' || c.status === 'sold')
+            c => c.status === 'active' || c.status === 'sold'
           ).length;
         }
         

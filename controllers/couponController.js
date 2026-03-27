@@ -18,11 +18,16 @@ exports.getCoupons = async (req, res, next) => {
       sort = '-createdAt',
       page = 1,
       limit = 12,
-      status = 'active'
+      status = 'active',
+      ownerId,
+      sellerId
     } = req.query;
 
     // Build query
-    const query = { status };
+    const query = {};
+    if (status && status !== 'all') query.status = status;
+    if (ownerId) query.ownerId = ownerId;
+    if (sellerId) query.sellerId = sellerId;
 
     // Category filter
     if (category) {
