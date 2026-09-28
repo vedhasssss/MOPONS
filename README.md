@@ -266,7 +266,7 @@ This project is licensed under the MIT License.
 
 ## 👨‍💻 Author
 
-Built with ❤️ by Vedhas Shinde
+Built with ❤️ by Vedhas Shinde ( shindevedhasp@gmail.com | 91+ 908222315)
 
 ## 🙏 Acknowledgments
 
